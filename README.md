@@ -1,9 +1,9 @@
 # 3DSNet: Unsupervised Shape-to-shape 3D Style Transfer
-This repository provides the code to implementour framework for learning-based 3D style transfer as described in ["3DSNet: Unsupervised Shape-to-shape 3D Style Transfer"](https://arxiv.org/abs/2011.13388). The code used to train and evaluate our framework on the Shapenet dataset is here provided and ready to use.
+This repository contains the code for our method for learning-based 3D style transfer as described in ["3DSNet: Unsupervised Shape-to-shape 3D Style Transfer"](https://arxiv.org/abs/2011.13388). The code used to train and evaluate our framework on the Shapenet dataset is here provided and ready to use.
 
 If you find this code useful for your project, please consider citing our paper:
 
-```
+```bibtex
 @article{segu20203dsnet,
   title={3DSNet: Unsupervised Shape-to-Shape 3D Style Transfer},
   author={Segu, Mattia and Grinvald, Margarita and Siegwart, Roland and Tombari, Federico},
@@ -95,7 +95,7 @@ The implementation of our adaptive Meshflow decoder is based on the [official Me
 
 
 If you cite our work, please consider citing also theirs.
-```
+```bibtex
 @inproceedings{groueix2018papier,
   title={A papier-m{\^a}ch{\'e} approach to learning 3d surface generation},
   author={Groueix, Thibault and Fisher, Matthew and Kim, Vladimir G and Russell, Bryan C and Aubry, Mathieu},
@@ -105,7 +105,7 @@ If you cite our work, please consider citing also theirs.
 }
 ```
 
-```
+```bibtex
 @article{gupta2020neural,
   title={Neural mesh flow: 3d manifold mesh generationvia diffeomorphic flows},
   author={Gupta, Kunal and Chandraker, Manmohan},
