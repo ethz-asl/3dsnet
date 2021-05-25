@@ -87,7 +87,7 @@ class StyleAtlasnet(nn.Module):
 
     def generate_mesh(self, content_latent_vector, style_latent_vector, train=False):
         assert content_latent_vector.size(0) == 1, "input should have batch size 1!"
-        import pymesh
+        import trimesh
 
         if train:
             input_points = [self.template[i].get_random_points(
@@ -118,12 +118,13 @@ class StyleAtlasnet(nn.Module):
                               for i in range(0, self.opt.nb_primitives)]
         output_points = torch.cat(output_patches, dim=1).squeeze(0)
 
-        output_meshes = [pymesh.form_mesh(vertices=output_points[i].transpose(1, 0).contiguous().cpu().numpy(),
+        output_meshes = [trimesh.Trimesh(vertices=output_points[i].transpose(1, 0).contiguous().cpu().numpy(),
                                           faces=self.template[i].mesh.faces)
                          for i in range(self.opt.nb_primitives)]
 
         # Deform return the deformed pointcloud
-        mesh = pymesh.merge_meshes(output_meshes)
+        mesh = trimesh.util.concatenate(output_meshes)
+        # mesh = pymesh.merge_meshes(output_meshes)
 
         return mesh
 

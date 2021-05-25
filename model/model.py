@@ -10,8 +10,6 @@ import model.resnet as resnet
 from model.meshflow import NeuralMeshFlow
 import torch
 import torch.nn as nn
-from pytorch3d.ops import sample_points_from_meshes
-from pytorch3d.structures import Meshes
 
 
 class StyleNetBase(nn.Module):

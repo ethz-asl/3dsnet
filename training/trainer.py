@@ -9,7 +9,8 @@ import shutil
 import auxiliary.html_report as html_report
 import numpy as np
 from easydict import EasyDict
-import pymesh
+# import pymesh
+import trimesh
 from termcolor import colored
 import auxiliary.my_utils as my_utils
 # import pymeshlab as ml
@@ -576,7 +577,7 @@ def unnormalize(mesh, operation=None):
         # Undo any normalization that was used to preprocess the input.
         vertices = torch.from_numpy(mesh.vertices).clone().unsqueeze(0)
         unnormalized_vertices = operation.apply(vertices)
-        mesh = pymesh.form_mesh(vertices=unnormalized_vertices.squeeze().numpy(), faces=mesh.faces)
+        mesh = trimesh.Trimesh(vertices=unnormalized_vertices.squeeze().numpy(), face = mesh.faces)
         return mesh
 
 def rename_path(path, unnormalized=False, demo=False, interpolated=False, ext='ply'):

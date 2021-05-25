@@ -61,7 +61,7 @@ class Atlasnet(nn.Module):
 
     def generate_mesh(self, latent_vector):
         assert latent_vector.size(0)==1, "input should have batch size 1!"
-        import pymesh
+        # import pymesh
         input_points = [self.template[i].get_regular_points(self.nb_pts_in_primitive, latent_vector.device)
                         for i in range(self.opt.nb_primitives)]
         input_points = [input_points[i] for i in range(self.opt.nb_primitives)]
@@ -70,12 +70,13 @@ class Atlasnet(nn.Module):
         output_points = [self.decoder[i](input_points[i], latent_vector.unsqueeze(2)).squeeze() for i in
                          range(0, self.opt.nb_primitives)]
 
-        output_meshes = [pymesh.form_mesh(vertices=output_points[i].transpose(1, 0).contiguous().cpu().numpy(),
+        output_meshes = [trimesh.Trimesh(vertices=output_points[i].transpose(1, 0).contiguous().cpu().numpy(),
                                           faces=self.template[i].mesh.faces)
                          for i in range(self.opt.nb_primitives)]
 
         # Deform return the deformed pointcloud
-        mesh = pymesh.merge_meshes(output_meshes)
+        mesh = trimesh.util.concatenate(output_meshes)
+        # mesh = pymesh.merge_meshes(output_meshes)
 
         return mesh
 
