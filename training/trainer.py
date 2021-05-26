@@ -223,12 +223,13 @@ class Trainer(TrainerAbstract, TrainerLoss, TrainerIteration, TrainerDataset, Tr
         if self.opt.decoder_type.lower() == 'atlasnet':
             if operation:
                 unnormalized_mesh = unnormalize(mesh, operation)
-                for name in mesh.get_attribute_names():
-                    val = mesh.get_attribute(name)
-                    unnormalized_mesh.add_attribute(name)
-                    unnormalized_mesh.set_attribute(name, val)
+                # for name in mesh.get_attribute_names():
+                #     val = mesh.get_attribute(name)
+                #     unnormalized_mesh.add_attribute(name)
+                #     unnormalized_mesh.set_attribute(name, val)
                 mesh = unnormalized_mesh
-            mesh_processor.save(mesh, path, self.colormap)
+            mesh.export(path)
+            # mesh_processor.save(mesh, path, self.colormap)
         elif self.opt.decoder_type.lower() == 'meshflow':
             # mesh_processor.save(mesh, path, self.colormap)
             mesh.export(path)
