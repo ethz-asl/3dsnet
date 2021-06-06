@@ -155,8 +155,9 @@ class SMXL(data.Dataset):
         if ext == 'npy':
             points = np.load(path)
         elif ext == 'ply' or ext == 'obj':
-            import pymesh
-            points = pymesh.load_mesh(path).vertices
+            # import pymesh
+            import trimesh
+            points = trimesh.load_mesh(path).vertices
         else:
             print('invalid file extension')
 
