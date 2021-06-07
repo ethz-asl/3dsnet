@@ -221,7 +221,7 @@ class Trainer(TrainerAbstract, TrainerLoss, TrainerIteration, TrainerDataset, Tr
         if not os.path.exists(base_dir):
             os.makedirs(base_dir)
         if self.opt.decoder_type.lower() == 'atlasnet':
-            if operation:
+            if operation is not None:
                 unnormalized_mesh = unnormalize(mesh, operation)
                 # for name in mesh.get_attribute_names():
                 #     val = mesh.get_attribute(name)
@@ -578,7 +578,7 @@ def unnormalize(mesh, operation=None):
         # Undo any normalization that was used to preprocess the input.
         vertices = torch.from_numpy(mesh.vertices).clone().unsqueeze(0)
         unnormalized_vertices = operation.apply(vertices)
-        mesh = trimesh.Trimesh(vertices=unnormalized_vertices.squeeze().numpy(), face = mesh.faces)
+        mesh = trimesh.Trimesh(vertices=unnormalized_vertices.squeeze().numpy(), faces = mesh.faces)
         return mesh
 
 def rename_path(path, unnormalized=False, demo=False, interpolated=False, ext='ply'):
