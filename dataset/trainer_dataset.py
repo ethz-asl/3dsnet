@@ -1,6 +1,8 @@
 import torch
 import dataset.dataset_shapenet as dataset_shapenet
 import dataset.dataset_smxl as dataset_smxl
+import dataset.dataset_caesar as dataset_caesar
+import dataset
 import dataset.augmenter as augmenter
 from easydict import EasyDict
 
@@ -16,6 +18,8 @@ class TrainerDataset(object):
             self.dataset_class = dataset_smxl.SMXL
         elif opt.dataset == 'ShapeNet':
             self.dataset_class = dataset_shapenet.ShapeNet
+        elif opt.dataset == 'Caesar':
+            self.dataset_class = dataset_shapenet.Caesar
 
     def build_dataset(self):
         """
