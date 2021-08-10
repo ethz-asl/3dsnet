@@ -51,7 +51,8 @@ Please download all auxiliary models needed for our framework in the `aux_models
 ### Data
 The pre-trained model publicly provided are trained on the [ShapeNet dataset](https://www.shapenet.org/). The pointcloud version of the dataset is automatically downloaded when running the code for the first time. 
 
-To seamlessly run the code, please also download the ShapeNet Core V1 dataset from [HERE](https://www.shapenet.org/) and move it to the subdirectory `.../ShapeNet` of the chosen `opt.data_dir`, set as default in the [argument_parser.py](auxiliary/argument_parser.py) to `dataset/data/`. Please notice that, despite V2 being already available, we used ShapeNet V1 for compatibility with the pointcloud version originally provided with the [official Atlasnet implementation](https://github.com/ThibaultGROUEIX/AtlasNet).
+To seamlessly run the code, please also download the ShapeNet Core V1 dataset from [HERE](https://www.shapenet.org/) and move it to the subdirectory `.../ShapeNet` of the chosen `opt.data_dir`, set as default in the [argument_parser.py](auxiliary/argument_parser.py) to `dataset/data/`. 
+In the same folder, also put the `all.csv` file containing training, validation and test splits for ShapeNet Core V1. You can download it from [HERE](https://drive.google.com/drive/folders/18OxvcDcCoxAfypU0zDrhsnCA4yXG_NRL?usp=sharing) or from the [original page](https://www.shapenet.org/) if available in the download section. Please notice that, despite V2 being already available, we used ShapeNet V1 for compatibility with the pointcloud version originally provided with the [official Atlasnet implementation](https://github.com/ThibaultGROUEIX/AtlasNet).
 
 ## Pre-trained Models
 You can find pre-trained models for our framework in the `3dsnet_models` folder [HERE](https://drive.google.com/drive/folders/1cyVRUmtN_YF-TXkytKfn1M0HlGH9Qux_?usp=sharing).
