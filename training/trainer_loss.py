@@ -7,8 +7,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import auxiliary.ChamferDistancePytorch.chamfer3D.dist_chamfer_3D as dist_chamfer_3D
-from pytorch3d.ops import sample_points_from_meshes
-from pytorch3d.structures import Meshes
+# from pytorch3d.ops import sample_points_from_meshes
+# from pytorch3d.structures import Meshes
 
 from auxiliary.ChamferDistancePytorch.fscore import fscore
 import os
@@ -65,8 +65,9 @@ class TrainerLoss(object):
             points = points.transpose(2, 3).contiguous()
             points = points.view(points.size(0), -1, 3)
         elif self.opt.decoder_type.lower() == "meshflow" and sample and self.flags.train:
-            meshes = Meshes(verts=points, faces=faces)
-            points = sample_points_from_meshes(meshes, num_samples=points.size(1))
+            pass
+            # meshes = Meshes(verts=points, faces=faces)
+            # points = sample_points_from_meshes(meshes, num_samples=points.size(1))
         return points
 
     def l1_distance(self, inputs, targets):

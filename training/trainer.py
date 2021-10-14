@@ -9,7 +9,8 @@ import shutil
 import auxiliary.html_report as html_report
 import numpy as np
 from easydict import EasyDict
-import pymesh
+# import pymesh
+import trimesh
 from termcolor import colored
 import auxiliary.my_utils as my_utils
 # import pymeshlab as ml
@@ -220,14 +221,15 @@ class Trainer(TrainerAbstract, TrainerLoss, TrainerIteration, TrainerDataset, Tr
         if not os.path.exists(base_dir):
             os.makedirs(base_dir)
         if self.opt.decoder_type.lower() == 'atlasnet':
-            if operation:
+            if operation is not None:
                 unnormalized_mesh = unnormalize(mesh, operation)
-                for name in mesh.get_attribute_names():
-                    val = mesh.get_attribute(name)
-                    unnormalized_mesh.add_attribute(name)
-                    unnormalized_mesh.set_attribute(name, val)
+                # for name in mesh.get_attribute_names():
+                #     val = mesh.get_attribute(name)
+                #     unnormalized_mesh.add_attribute(name)
+                #     unnormalized_mesh.set_attribute(name, val)
                 mesh = unnormalized_mesh
-            mesh_processor.save(mesh, path, self.colormap)
+            mesh.export(path)
+            # mesh_processor.save(mesh, path, self.colormap)
         elif self.opt.decoder_type.lower() == 'meshflow':
             # mesh_processor.save(mesh, path, self.colormap)
             mesh.export(path)
@@ -576,7 +578,7 @@ def unnormalize(mesh, operation=None):
         # Undo any normalization that was used to preprocess the input.
         vertices = torch.from_numpy(mesh.vertices).clone().unsqueeze(0)
         unnormalized_vertices = operation.apply(vertices)
-        mesh = pymesh.form_mesh(vertices=unnormalized_vertices.squeeze().numpy(), faces=mesh.faces)
+        mesh = trimesh.Trimesh(vertices=unnormalized_vertices.squeeze().numpy(), faces = mesh.faces)
         return mesh
 
 def rename_path(path, unnormalized=False, demo=False, interpolated=False, ext='ply'):

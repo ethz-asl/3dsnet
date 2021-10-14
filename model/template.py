@@ -1,4 +1,5 @@
-import pymesh
+# import pymesh
+import trimesh
 import numpy as np
 import torch
 from torch.autograd import Variable
@@ -48,7 +49,7 @@ class SphereTemplate(Template):
         Return Tensor of Size [x, 3]
         """
         if not self.npoints == npoints:
-            self.mesh = pymesh.generate_icosphere(1, [0, 0, 0], 4)  # 2562 vertices
+            self.mesh = trimesh.creation.icosphere(subdivisions = 4 ,radius = 1)  # 2562 vertices
             self.vertex = torch.from_numpy(self.mesh.vertices).to(device).float()
             self.num_vertex = self.vertex.size(0)
             self.vertex = self.vertex.transpose(0,1).contiguous().unsqueeze(0)
@@ -80,7 +81,7 @@ class SquareTemplate(Template):
         if not self.npoints == npoints:
             self.npoints = npoints
             vertices, faces = self.generate_square(np.sqrt(npoints))
-            self.mesh = pymesh.form_mesh(vertices=vertices, faces=faces)  # 10k vertices
+            self.mesh = trimesh.Trimesh(vertices=vertices, faces=faces)  # 10k vertices
             self.vertex = torch.from_numpy(self.mesh.vertices).to(device).float()
             self.num_vertex = self.vertex.size(0)
             self.vertex = self.vertex.transpose(0,1).contiguous().unsqueeze(0)

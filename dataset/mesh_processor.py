@@ -1,4 +1,3 @@
-import pymesh
 import numpy as np
 from os.path import join, dirname
 
@@ -34,4 +33,4 @@ def save(mesh, path, colormap):
             mesh.set_attribute("vertex_blue", colormap.colormap[vertex_sources][:, 2])
     except:
         pass
-    pymesh.save_mesh(path[:-3] + "ply", mesh, *mesh.get_attribute_names(), ascii=True)
+    mesh.export(path[:-3] + "ply")

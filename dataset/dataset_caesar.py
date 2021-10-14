@@ -11,11 +11,11 @@ import auxiliary.my_utils as my_utils
 import dataset.pointcloud_processor as pointcloud_processor
 
 
-class SMXL(data.Dataset):
+class Caesar(data.Dataset):
     """
-    SMXL Dataloader
-    Uses SMAL V1, SMPL and SMIL
-    Make sure to respect SMAL, SMPL and SMIL Licence.
+    Caesar Dataloader
+    Uses caesar dataset
+    Make sure to respect dataset Licence.
     """
 
     def __init__(self, opt, unused_category, subcategory, unused_svr=False, train=True):
@@ -26,8 +26,8 @@ class SMXL(data.Dataset):
         self.mode = 'training' if train else 'validation'
         self.subcategory = subcategory
 
-        self.id2names = {0: 'cats', 1: 'dogs', 2: 'horses', 3: 'cows', 4: 'hippos', 5: 'male', 6: 'female'}
-        self.names2id = {'cats': 0, 'dogs': 1, 'horses': 2, 'cows': 3, 'hippos': 4, 'male': 5, 'female': 6}
+        self.id2names = {0: 'person'}
+        self.names2id = {'person': 0}
 
         # Initialize pointcloud normalization functions
         self.init_normalization()
@@ -39,9 +39,9 @@ class SMXL(data.Dataset):
             else:
                 raise ValueError('Argument class_choice must contain exactly two classes.')
 
-            my_utils.red_print('Create SMXL Dataset...')
+            my_utils.red_print('Create Caesar Dataset...')
             # Define core path array
-            self.dataset_path = os.path.join(opt.data_dir, 'SMXL')
+            self.dataset_path = os.path.join(opt.data_dir, 'Caesar')
 
             # Create Cache path
             self.path_dataset = os.path.join(self.dataset_path, 'cache')

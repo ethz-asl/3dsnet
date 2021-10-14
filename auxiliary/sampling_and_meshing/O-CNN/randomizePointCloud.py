@@ -1,7 +1,8 @@
 import argparse
 from os import listdir
 from os.path import isfile, join
-import pymesh
+# import pymesh
+import trimesh
 import numpy as np
 import copy
 import joblib
@@ -15,7 +16,7 @@ from pcSamplingInfRayShapeNet import Count
 def shuffle_pc(file, output_path, limit=None, count=None):
 	try:
 		if not os.path.exists(output_path + ".npy"):
-			mesh = pymesh.load_mesh(file)
+			mesh = trimesh.load_mesh(file)
 
 			vertices = copy.deepcopy(mesh.vertices)
 			permutation = np.random.permutation(len(vertices))

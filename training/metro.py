@@ -1,6 +1,7 @@
 import argparse
 import numpy as np
-import pymesh
+# import pymesh
+import trimesh
 from os.path import exists
 import os
 import subprocess
@@ -46,12 +47,12 @@ def isolate_files():
             path_png = '/'.join(['.', 'dataset', 'data', 'ShapeNetV1Renderings', cat, name, "rendering", '00.png'])
 
             path_obj = '/'.join(['', 'home', 'thibault', 'hdd', 'data', 'ShapeNetCore.v1', cat, name, 'model.obj'])
-            mesh = pymesh.load_mesh(path_obj)
+            mesh = trimesh.load_mesh(path_obj)
             points = np.load((path_points))
             if not exists('/'.join(['.', 'dataset', 'data', 'metro_files', cat])):
                 os.mkdir('/'.join(['.', 'dataset', 'data', 'metro_files', cat]))
 
-            pymesh.save_mesh('/'.join(['.', 'dataset', 'data', 'metro_files', cat, name + '.ply']), mesh, ascii=True)
+            mesh.export('/'.join(['.', 'dataset', 'data', 'metro_files', cat, name + '.ply']))
             np.save('/'.join(['.', 'dataset', 'data', 'metro_files', cat, name + '.npy']), points)
             copy(path_png, '/'.join(['.', 'dataset', 'data', 'metro_files', cat, name + '.png']))
 
