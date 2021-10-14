@@ -23,7 +23,7 @@ This implementation uses Python 3.6, [Pytorch](http://pytorch.org/), [Pymesh](ht
 
 ```shell
 # Copy-Paste the snippet in a terminal
-git clone --recurse-submodules https://github.com/path-to-repo  # TODO(mattiasegu): fix later
+git clone --recurse-submodules https://github.com/ethz-asl/3dsnet.git
 cd 3dsnet 
 
 # Install dependencies
@@ -43,6 +43,17 @@ pip install --user --requirement  requirements.txt # pip dependencies
 ```
 
 Chumpy installation with pip is currently broken with pip version 20.1. Please use pip 20.0.2 until chumpy issue won't be fixed.
+
+### Compile Chamfer (MIT) + Metro Distance (GPL3 Licence)
+```shell
+# Copy/Paste the snippet in a terminal
+python auxiliary/ChamferDistancePytorch/chamfer3D/setup.py install #MIT
+cd auxiliary
+git clone https://github.com/ThibaultGROUEIX/metro_sources.git
+cd metro_sources; python setup.py --build # build metro distance #GPL3
+cd ../..
+
+```
 
 ## Before running the code
 ### Auxiliary models
